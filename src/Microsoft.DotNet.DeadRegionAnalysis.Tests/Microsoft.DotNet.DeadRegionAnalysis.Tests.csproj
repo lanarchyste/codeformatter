@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net46</TargetFramework>
+    <TargetFramework>net471</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\Microsoft.DotNet.DeadRegionAnalysis\Microsoft.DotNet.DeadRegionAnalysis.csproj" />
