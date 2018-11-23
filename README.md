@@ -31,6 +31,23 @@ CodeFormatter <project or solution> [<rule types>] [/file:<filename>] [/nocopyri
     <copyright>  - Specifies file containing copyright header.
 ```
 
+## Rules
+
+```
+BraceNewLine         :Ensure all braces occur on a new line
+Copyright            :Insert the copyright header into every file
+NewLineAbove         :Ensure there is a new line above the first namespace and using in the file
+CustomCopyright      :Remove any custom copyright header from the file
+UsingLocation        :Place using directives outside namespace declarations
+UnicodeLiterals      :Use unicode escape sequence instead of unicode literals
+ExplicitVisibility   :Ensure all members have an explicit visibility modifier
+IllegalHeaders       :Remove illegal headers from files
+FormatDocument       :Run the language specific formatter on every document
+ExplicitThis         :Remove explicit this/Me prefixes on expressions except where necessary
+ReadonlyFields       :Mark fields which can be readonly as readonly
+FieldNames           :Prefix private fields with _ and statics with s_
+```
+
 ## Contributing
 
 We follow the same contribution process that 
