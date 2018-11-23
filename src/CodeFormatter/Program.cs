@@ -2,6 +2,9 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.MSBuild;
+using Microsoft.DotNet.CodeFormatting;
 using System;
 using System.Collections.Immutable;
 using System.IO;
@@ -9,9 +12,6 @@ using System.Linq;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.MSBuild;
-using Microsoft.DotNet.CodeFormatting;
 
 namespace CodeFormatter
 {
@@ -113,7 +113,7 @@ namespace CodeFormatter
         }
 
         private static async Task RunFormatItemAsync(IFormattingEngine engine, string item, string language, CancellationToken cancellationToken)
-        { 
+        {
             Console.WriteLine(Path.GetFileName(item));
             string extension = Path.GetExtension(item);
             if (StringComparer.OrdinalIgnoreCase.Equals(extension, ".rsp"))
@@ -129,7 +129,7 @@ namespace CodeFormatter
                 using (var workspace = MSBuildWorkspace.Create())
                 {
                     workspace.LoadMetadataForReferencedProjects = true;
-                    var solution = await workspace.OpenSolutionAsync(item, cancellationToken);
+                    var solution = await workspace.OpenSolutionAsync(item, null, cancellationToken);
                     await engine.FormatSolutionAsync(solution, cancellationToken);
                 }
             }
@@ -138,7 +138,7 @@ namespace CodeFormatter
                 using (var workspace = MSBuildWorkspace.Create())
                 {
                     workspace.LoadMetadataForReferencedProjects = true;
-                    var project = await workspace.OpenProjectAsync(item, cancellationToken);
+                    var project = await workspace.OpenProjectAsync(item, null, cancellationToken);
                     await engine.FormatProjectAsync(project, cancellationToken);
                 }
             }

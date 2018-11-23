@@ -2,6 +2,10 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Microsoft.CodeAnalysis.MSBuild;
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
@@ -10,10 +14,6 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Microsoft.CodeAnalysis.MSBuild;
 
 namespace Microsoft.DotNet.DeadRegionAnalysis
 {
@@ -46,7 +46,7 @@ namespace Microsoft.DotNet.DeadRegionAnalysis
             var firstFileExt = Path.GetExtension(filePaths.First());
             if (firstFileExt.EndsWith("proj", StringComparison.OrdinalIgnoreCase))
             {
-                projects = await Task.WhenAll(from path in filePaths select MSBuildWorkspace.Create().OpenProjectAsync(path, cancellationToken));
+                projects = await Task.WhenAll(from path in filePaths select MSBuildWorkspace.Create().OpenProjectAsync(path, null, cancellationToken));
             }
             else
             {

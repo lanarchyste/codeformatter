@@ -4,9 +4,6 @@
 
 using Microsoft.CodeAnalysis.MSBuild;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -32,7 +29,7 @@ namespace XUnitConverter
             var workspace = MSBuildWorkspace.Create();
             workspace.LoadMetadataForReferencedProjects = true;
 
-            var project = await workspace.OpenProjectAsync(projectPath, cancellationToken);
+            var project = await workspace.OpenProjectAsync(projectPath, null, cancellationToken);
             var converters = new ConverterBase[]
                 {
                     new MSTestToXUnitConverter(),
